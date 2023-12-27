@@ -1,0 +1,128 @@
+<div class="d-flex align-items-start">
+  <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="background-color: #1C4E80;border-radius: 0px 15px 15px 0px;height: 100vh;">
+    <div class="profile d-flex justify-content-center align-items-center" style="padding: 20px;">
+      <img src="../../../assets/pp.jpg" width="50px" style="border-radius: 50%;height: 50px;margin-right: 20px;">
+      <p style="margin-top: 6px;font-size: 20px;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;color: #fff;font-weight: bold;">Ghassen Ahmed</p>
+    </div>
+    <div class="btns d-flex flex-column" style="margin-left: 50px; margin-top: 40px;">
+      <button class="nav-link active" id="v-pills-food-tab" data-bs-toggle="pill" data-bs-target="#v-pills-food" type="button" role="tab" aria-controls="v-pills-food" aria-selected="true"><i class="bi bi-menu-up"></i>Foods</button>
+      <button class="nav-link" id="v-pills-add-tab" data-bs-toggle="pill" data-bs-target="#v-pills-add" type="button" role="tab" aria-controls="v-pills-add" aria-selected="false"><i class="bi bi-plus"></i>Add Food</button>
+    </div>
+
+
+  </div>
+  <div class="tab-content" id="v-pills-tabContent" style="width: 100%;height: 100%;">
+
+    <!-- -------------------------------All food---------------------- -->
+    <div class="tab-pane fade show active" id="v-pills-food" role="tabpanel" aria-labelledby="v-pills-food-tab" tabindex="0">
+      <button mat-mini-fab color="warn"  class="mt-2 m-5 float-end" routerLink="/" aria-label="Example icon button with a home icon">
+        <mat-icon>home</mat-icon>
+      </button>
+      <h2 style="margin-top: 50px;">All Foods</h2>
+      <div class="container d-flex justify-content-center align-items-center" style="margin-top: 50px;padding: 50px 100px 50px 50px;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" style="font-size: 25px;">Photo</th>
+              <th scope="col" style="font-size: 25px;">Name</th>
+              <th scope="col" style="font-size: 25px;">Price</th>
+              <th scope="col" style="font-size: 25px;">Operations</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="allFood?.length > 0 ; else elseBlock">
+              <tr class="pt-3" *ngFor="let i of allFood">
+                <td>
+                  <div >
+                    <img [src]="i.photo" width="100px" height="66px" style="border-radius: 10px;">
+                  </div>
+                </td>
+                <td class="" style="padding-top: 23px;font-size: 20px;">
+                  <p>{{i.name}}</p>
+                </td>
+                <td class="" style="padding-top: 26px;font-size: 20px;">
+                  <p>{{i.price}} DT</p>
+                </td>
+                <td  class="" style="font-size: 20px;">
+                  <div class="div" style="padding-top: 15px;">
+                    <button type="button" class="btn btn-warning" style="margin-right: 20px;font-size: 10px;" routerLink="/updateFood/{{i.id}}"><i class="bi bi-pen-fill"></i></button>
+                    <button type="button" class="btn btn-danger" style="font-size: 10px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop" ><i class="bi bi-trash3-fill"></i></button>
+                        <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Food</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                          Are you sure you want delete this food ?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-danger" (click)="deleteFood(i.id)" data-bs-dismiss="modal">Yes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </td>
+
+              </tr>
+          </tbody>
+        </table>
+        <ng-template #elseBlock>
+          <div class="div d-flex justify-content-center" style="width: 100%;margin-top: 40px;">
+           <p style="font-size: 20px;">No food available .</p>
+          </div>
+        </ng-template>
+      </div>
+
+    </div>
+
+    <!-- -------------------------------add food---------------------- -->
+    <div class="tab-pane fade" id="v-pills-add" role="tabpanel" aria-labelledby="v-pills-add-tab" tabindex="0">
+      <button mat-mini-fab color="warn"  class="mt-2 m-5 float-end" routerLink="/" aria-label="Example icon button with a home icon">
+        <mat-icon>home</mat-icon>
+      </button>
+      <div class="container" style="width: 100%;height: 100%;">
+        <h2 style="margin-top: 50px;">Add Food</h2>
+        <form action="" [formGroup]="AddForm"  (ngSubmit)="addFood()" ENCTYPE="multipart/form-data">
+        <div class="container flex-column" style="margin-top: 100px; display: flex; justify-content: center;">
+
+            <mat-form-field class="example-full-width" style="margin-left: 25%; margin-right: 25%;">
+              <mat-label>Food Name</mat-label>
+              <input matInput [(ngModel)]="food.name" [formControl]="NameForm" >
+              <mat-icon matSuffix  [style.color]="NameForm.invalid ? 'red' : 'green'">
+                {{NameForm.invalid ? 'close' : 'done_outline'}}
+              </mat-icon>
+              <mat-error *ngIf="NameForm.invalid">{{NameFormError()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" style="margin-left: 25%; margin-right: 25%;">
+              <mat-label>Food Price</mat-label>
+              <input matInput [(ngModel)]="food.price" [formControl]="PriceForm">
+              <mat-icon matSuffix  [style.color]="NameForm.invalid ? 'red' : 'green'">
+                {{PriceForm.invalid ? 'close' : 'done_outline'}}
+              </mat-icon>
+              <mat-error *ngIf="PriceForm.invalid">{{PriceFormError()}}</mat-error>
+            </mat-form-field>
+
+            <div style="margin-left: 25%; margin-right: 25%;">
+              <label for="formFileLg" class="form-label">Add Photo</label>
+              <input class="form-control form-control-lg" id="formFileLg" type="file" (change)="onFileChanged($event)">
+            </div>
+
+            <button mat-raised-button color="primary" type="submit" style="width: 200px;margin-left: 25%; margin-right: 25%;margin-top: 20px;">
+              <mat-icon>save</mat-icon> Save
+            </button>
+
+
+          </div>
+        </form>
+        </div>
+
+    </div>
+
+  </div>
+</div>

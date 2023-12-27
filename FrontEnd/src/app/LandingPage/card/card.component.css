@@ -1,0 +1,27 @@
+.card{
+  border: none;
+}
+
+.card h2{
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: 20px;
+  letter-spacing: 2.6px;
+  word-spacing: 2px;
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: uppercase;
+  color: red;
+  font-weight: bolder;
+}
+
+.card h4{
+  color: #54ad21;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: 15px;
+  letter-spacing: 2.6px;
+  word-spacing: 2px;
+  font-weight: bolder;
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: uppercase;
+}

@@ -1,0 +1,36 @@
+package com.example.demo.services;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entities.Food;
+import com.example.demo.repositories.FoodRepository;
+
+@Service
+public class FoodService {
+	
+	@Autowired
+	FoodRepository foodRepository;
+	
+	
+	
+	public List<Food> getAllFood() {
+	    List<Food> foods = foodRepository.findAll();
+	    if (foods.isEmpty()) {
+	        return Collections.emptyList();
+	    }
+	    
+	    return foods;
+	}
+	
+	public void addFood(Food food) {
+		Food newFood = new Food();
+		newFood.setName(food.getName());
+		newFood.setPhoto(food.getPhoto());
+		newFood.setPrice(food.getPrice());
+	}
+
+}

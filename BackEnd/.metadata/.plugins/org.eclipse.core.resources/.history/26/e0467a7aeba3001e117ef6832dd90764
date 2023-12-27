@@ -1,0 +1,33 @@
+package com.example.demo.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entities.Food;
+import com.example.demo.repositories.FoodRepository;
+
+@Service
+public class FoodService {
+	
+	@Autowired
+	FoodRepository foodRepository;
+	
+	
+	 public List<Food> getAllFood() throws Exception{
+		 
+			List<Food> foods = foodRepository.findAll();
+			
+	        if (foods.size()==0) {
+	            throw new Exception(" No food available.");
+	        }
+	        try {
+	            return foods;
+	        } catch (Exception ex) {
+	            // Log the error or throw a custom exception with a meaningful message
+	            throw new RuntimeException("An error occurred while fetching food data.", ex);
+	        }
+	    }
+
+}

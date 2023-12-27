@@ -1,0 +1,74 @@
+body{
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.circle{
+  width: 70%;
+  height: 500px;
+  border-radius: 50%;
+  border: red 3px solid;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  /* background-image: url(../../../assets/fajitas2.jpg); */
+  background-image: url(../../../assets/fajitas7.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: 70px;
+}
+
+.circle2{
+  width: 50px;
+  height: 50px;
+  clip-path: circle(50% at 50% 50%);
+  border: 2 solid #6EE22A;
+}
+header{
+  background-image: url(../../../assets/background.png);
+  height: auto;
+}
+.line{
+  width: 100%;
+}
+.rectangle-container {
+  width: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  justify-content: end;
+  margin-right: 20px;
+}
+
+.rectangle {
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+}
+.button{
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 5px;
+  width: 220px;
+  height: 50px;
+}
+
+.circle1{
+  width: 50px;
+  height: 50px;
+  background-image: url(../../../assets/circle1.png);
+}
+
+.circle3{
+  width: 200px;
+  height: 200px;
+  background-image: url(../../../assets/circle3.png);
+  background-repeat: no-repeat;
+}
+
+.circle2{
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  background-image: url(../../../assets/circle2.png);
+}

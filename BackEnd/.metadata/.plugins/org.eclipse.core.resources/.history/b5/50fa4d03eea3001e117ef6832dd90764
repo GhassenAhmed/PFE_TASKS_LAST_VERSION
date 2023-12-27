@@ -1,0 +1,45 @@
+package com.example.demo.services;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entities.Food;
+import com.example.demo.repositories.FoodRepository;
+
+@Service
+public class FoodService {
+	
+	@Autowired
+	FoodRepository foodRepository;
+	
+	
+	
+	public List<Food> getAllFood() {
+	    List<Food> foods = foodRepository.findAll();
+	    if (foods.isEmpty()) {
+	        return Collections.emptyList();
+	    }
+	    
+	    return foods;
+	}
+	
+	public Food addFood(Food food) {
+		
+		 if (food == null || food.getName() == null || food.getPrice() == 0) {
+	            throw new IllegalArgumentException("Food object and its properties cannot be null.");
+	     }
+		 
+		Food newFood = new Food();
+		newFood.setName(food.getName());
+		newFood.setPhoto(food.getPhoto());
+		newFood.setPrice(food.getPrice());
+		
+		Food savedFood = foodRepository.save(newFood);
+		
+		return savedFood;
+	}
+
+}

@@ -1,0 +1,21 @@
+.dashboard{
+  margin: 15px;
+}
+.btns .active{
+  background-color: #142a41;
+}
+
+.btns button:hover{
+  background-color: #142a418c;
+}
+
+.nav-link{
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 20px;
+  width: 200px;
+}
+
+.nav-link i{
+ margin-right: 20px;
+}

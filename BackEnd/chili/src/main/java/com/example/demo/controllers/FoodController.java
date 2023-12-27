@@ -1,0 +1,102 @@
+package com.example.demo.controllers;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.Food;
+import com.example.demo.payloads.Photo;
+import com.example.demo.repositories.FoodRepository;
+import com.example.demo.services.FoodService;
+
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+@RequestMapping("/food")
+public class FoodController {
+	
+	@Autowired
+	FoodService foodService;
+	
+	@Autowired
+	FoodRepository foodRepository;
+	
+	@GetMapping("/getAllFood")
+	public ResponseEntity<?> getAllFood() {
+	    try {
+	        List<Food> foods = foodService.getAllFood();
+	        if (foods.isEmpty()) {
+	            return ResponseEntity.ok().body("No food available");
+	        }
+	        return new ResponseEntity<>(foods, HttpStatus.OK);
+	    } catch (Exception e) {
+	       
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while fetching food data.");
+	    }
+	}
+	
+	
+	@PostMapping("/addFood")
+	public ResponseEntity<?> addFood(@RequestBody Food food){
+		 return new ResponseEntity<>(foodService.addFood(food),HttpStatus.OK);
+		
+	}
+	
+	
+	@DeleteMapping("/deleteFood")
+	public ResponseEntity<?> deleteFood(@RequestParam("id") Long id){
+		
+		try {
+			foodService.deleteFood(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}catch(Exception e) {
+			return  ResponseEntity.ok().body("No Food available.");
+		}
+	}
+	
+	@PostMapping("/updateFood")
+	public ResponseEntity<?> updateFood(@RequestBody Food food , @RequestParam("id") Long id){
+		try {
+			return new ResponseEntity<>(foodService.updatefood(food, id),HttpStatus.OK);
+		}catch(Exception e) {
+			return  ResponseEntity.ok().body("Food Not Found.");
+		}
+		
+	}
+	
+	@PostMapping("/updatePhoto")
+    public ResponseEntity<?> EditPhoto(@RequestBody String photo,@RequestParam("id") Long id){
+    	 
+			try {
+				foodService.updatePhoto(photo,id);
+				 return  ResponseEntity.ok().body("Photo updated.");
+			} catch (Exception e) {
+				e.printStackTrace();
+				return  ResponseEntity.ok().body("Food Not Found.");
+			}
+    	 
+    }
+	
+	@GetMapping("/getById")
+	public ResponseEntity<?> getById(@RequestParam("id") Long id){
+		Food food = foodRepository.getFoodById(id);
+		if(food==null) {
+			return  ResponseEntity.ok().body("Food Not Found.");
+		}else {
+			 return  ResponseEntity.ok().body(food);
+		}
+			
+	}
+
+}

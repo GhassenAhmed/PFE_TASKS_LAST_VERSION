@@ -1,0 +1,42 @@
+<button mat-mini-fab color="warn"  class="mt-2 m-5" routerLink="/dashboard" aria-label="Example icon button with a home icon">
+  <mat-icon>keyboard_arrow_left</mat-icon>
+</button>
+<div class="container d-flex justify-content-center align-items-center" style="width: 100%;">
+  <form action="" [formGroup]="updateForm"  (ngSubmit)="updateFood()" ENCTYPE="multipart/form-data">
+    <div class="container flex-column" style="margin-top: 100px; display: flex; justify-content: center;">
+
+        <mat-form-field class="example-full-width" >
+          <mat-label>Food Name</mat-label>
+          <input matInput [(ngModel)]="foodById.name" [formControl]="NameForm" >
+          <mat-icon matSuffix  [style.color]="NameForm.invalid ? 'red' : 'green'">
+            {{NameForm.invalid ? 'close' : 'done_outline'}}
+          </mat-icon>
+          <mat-error *ngIf="NameForm.invalid">{{NameFormError()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Food Price</mat-label>
+          <input matInput [(ngModel)]="foodById.price" [formControl]="PriceForm">
+          <mat-icon matSuffix  [style.color]="NameForm.invalid ? 'red' : 'green'">
+            {{PriceForm.invalid ? 'close' : 'done_outline'}}
+          </mat-icon>
+          <mat-error *ngIf="PriceForm.invalid">{{PriceFormError()}}</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" style="width: 200px;margin-left: 25%; margin-right: 25%;margin-top: 20px;">
+          <mat-icon>save</mat-icon> Save
+        </button>
+
+
+        <div style="margin-top: 20px;">
+          <label for="formFileLg" class="form-label">Update Photo</label>
+          <input class="form-control form-control-lg" id="formFileLg" type="file" (change)="onFileChanged($event)">
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" style="width: 200px;margin-left: 25%; margin-right: 25%;margin-top: 20px;" (click)="updatePhoto()">
+          <mat-icon>save</mat-icon> Save
+        </button>
+      </div>
+  </form>
+</div>
+
+
