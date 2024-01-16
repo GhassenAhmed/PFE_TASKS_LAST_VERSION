@@ -15,6 +15,9 @@ import { NavbarComponent } from './DashboardAdmin/navbar/navbar.component';
 import { SideBarComponent } from './DashboardAdmin/sideBar/side-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditFoodComponent } from './DashboardAdmin/update/edit-food.component';
+import { VideoComponent } from './video/video.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -30,6 +33,7 @@ import { EditFoodComponent } from './DashboardAdmin/update/edit-food.component';
     NavbarComponent,
     SideBarComponent,
     EditFoodComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,8 @@ import { EditFoodComponent } from './DashboardAdmin/update/edit-food.component';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
